@@ -1,10 +1,4 @@
 
-class FridgeProgram
-
-    class Fridge(self, groceries)
-
-
-
 groceries = {
     "Salat": 2,
     "Tomato": 4,
@@ -86,12 +80,14 @@ def add_grocery_item(name, count):
 
 def substract_grocery_item(name, count):
     if name in groceries:
-        if groceries[name] >= count:
-            groceries[name] -= count
-            if groceries[name] == 0:
-                del groceries[name]
-        else:
-            print("you took too much, you dont have that many")
+        while True:
+            if groceries[name] >= count:
+                groceries[name] -= count
+                if groceries[name] == 0:
+                    del groceries[name]
+            else:
+                print("you took too much, you dont have that many")
+                break
     else:
         print("this item is not in your fridge. ")
 
