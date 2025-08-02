@@ -1,14 +1,9 @@
 
 
 class FridgeProgram:
-    def __init__(self):
-        self.groceries = {
-            "Salat": 2,
-            "Tomato": 4,
-            "Peach": 7
-        }
+    def __init__(self, groceries):
+        self.groceries = groceries
 
-                
 
     def get_user_input(self, message):
         response = input(message)
@@ -102,6 +97,7 @@ class FridgeProgram:
         self.handle_menu()
 
 
+
     def handle_menu(self):
         while True:
             answer = self.get_user_input(
@@ -137,9 +133,16 @@ class FridgeProgram:
 
        
 
+                
 
 
 
 if __name__ == "__main__":
-    program = FridgeProgram()
+    groceries = {
+    "Salat": 2,
+    "Tomato": 4,
+    "Peach": 7
+    }
+    program = FridgeProgram(groceries)
     program.main()
+  
