@@ -6,7 +6,11 @@ from fridge import Fridge
 class FridgeProgram:
     def __init__(self, fridge, filename="groceries_in_fridge.json"):
         self.fridge = fridge
+        self.filename = filename
+        self.fridge.load_from_json(self.filename)
 
+    def save_changes(self):
+        self.fridge.save_to_json(self.filename)
 
     def get_user_input(self, message):
         response = input(message)
@@ -71,17 +75,20 @@ class FridgeProgram:
             if answer == "1":
                 name, count = self.get_name_and_quantity_input()
                 self.fridge.add_item(name, count)
+                self.save_changes() 
                 self.fridge.log_groceries()
 
             elif answer == "2":
                 name, count = self.get_name_and_quantity_input()
                 self.fridge.remove_item(name, count)
+                self.save_changes() 
                 self.fridge.log_groceries()
                 
             elif answer == "3":
                 old_name = self.get_user_input("Which item do you want to rename? ")
                 new_name = self.get_user_input("Enter new name: ")
                 self.fridge.rename_item(old_name, new_name)
+                self.save_changes() 
                 self.fridge.log_groceries()
 
             elif answer == "4":

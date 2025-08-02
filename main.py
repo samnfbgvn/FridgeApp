@@ -13,12 +13,19 @@ if __name__ == "__main__":
         "Eggs": 12,
         "Butter": 1
     }
+
+    choice = input("Which fridge do you want to open? (1 or 2): ")
+
+  
     first_fridge = Fridge(groceries1)
     first_program = FridgeProgram(first_fridge)
 
     second_fridge = Fridge(groceries2)
     second_program = FridgeProgram(second_fridge)
 
-
-    first_program.run()
-    second_program.run()
+    if choice == "1":
+        first_program.run()
+    elif choice == "2":    
+        second_program.run()
+    else:
+        print("Invalid choice. Closing program.")
