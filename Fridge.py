@@ -45,6 +45,19 @@ class Fridge:
         else:
             print(f"{name} is not in your fridge.")
 
-    
 
-                
+    def save_to_json(self, filename="groceries_in_fridge.json"):
+        with open(filename, "w") as file:
+            json.dump(self.groceries, file, indent=4)
+        print("Fridge contents saved!")
+
+    def load_from_json(self, filename="groceries_in_fridge.json"):
+        try:
+            with open(filename, "r") as file:
+                self.groceries = json.load(file)
+            print(f"Fridge contents loaded from {filename}!")
+        except FileNotFoundError:
+            print(f"No file named {filename} found. Starting with an empty fridge.")
+            self.groceries = {}
+
+    
