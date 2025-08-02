@@ -4,7 +4,7 @@ import json
 from fridge import Fridge
 
 class FridgeProgram:
-    def __init__(self, fridge):
+    def __init__(self, fridge, filename="groceries_in_fridge.json"):
         self.fridge = fridge
 
 
