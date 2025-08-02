@@ -13,7 +13,9 @@ class Fridge:
             self.groceries[name] = count
 
 
-    def log_groceries(self):    
+    def log_groceries(self):   
+        if not self.groceries:
+            print("The fridge is empty.") 
         for name, quantity  in self.groceries.items():
             print(f"- {name}: {quantity } ks")
 
@@ -27,8 +29,7 @@ class Fridge:
                 print(f"Item '{new_name}' already exists.")
             else:
                 self.groceries[new_name] = self.groceries.pop(old_name)
-                print(f"Renamed '{old_name}' to '{new_name}'")
-          
+                print(f"Renamed '{old_name}' to '{new_name}'")    
         else:
             print(f"{old_name} does not exist in your fridge.")
 
@@ -47,15 +48,3 @@ class Fridge:
     
 
                 
-
-
-
-if __name__ == "__main__":
-    groceries = {
-    "Salat": 2,
-    "Tomato": 4,
-    "Peach": 7
-    }
-    program = Fridge(groceries)
-    program.main()
-  

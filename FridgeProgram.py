@@ -1,8 +1,11 @@
+import requests
+import json
 
+from fridge import Fridge
 
 class FridgeProgram:
-    def __init__(self, groceries):
-        self.groceries = groceries
+    def __init__(self, fridge):
+        self.fridge = fridge
 
 
     def get_user_input(self, message):
@@ -10,7 +13,7 @@ class FridgeProgram:
         return response
 
     def is_input_string(self, text):
-        if text.isalpha():
+        if all(c.isalpha() or c.isspace() for c in text) and text.strip() != "":
             return True
         else:
             print("Your log needs to have only letters")
@@ -37,62 +40,18 @@ class FridgeProgram:
                 continue
             break
 
-        return name.lower(), int(count)
+        return name, int(count)
     
-######
-    
-    def add_item(self, name, count):
-        name = name.title() 
-        if name in self.groceries:
-            self.groceries[name] += count
-            return count
-        else:
-            self.groceries[name] = count
 
-
-    def log_groceries(self):    
-        for name, quantity  in self.groceries.items():
-            print(f"- {name}: {quantity } ks")
-
-    
-    def rename_item(self, old_name, new_name):
-        old_name = old_name.title()
-        new_name = new_name.title()
-
-        if old_name in self.groceries:
-            if new_name in self.groceries:
-                print(f"Item '{new_name}' already exists.")
-            else:
-                self.groceries[new_name] = self.groceries.pop(old_name)
-                print(f"Renamed '{old_name}' to '{new_name}'")
-          
-        else:
-            print(f"{old_name} does not exist in your fridge.")
-
-    def remove_item(self, name, count):
-        name = name.title()
-        if name in self.groceries:
-            if self.groceries[name] >= count:
-                self.groceries[name] -= count
-                if self.groceries[name] == 0:
-                    del self.groceries[name]
-            else:
-                print(f"You only have {self.groceries[name]} of {name} you took too much.")
-        else:
-            print(f"{name} is not in your fridge.")
-
-       
-
-#####
-
-    def main(self):
+    def run(self):
         answer = self.get_user_input("Do you wanna now what you have in fridge? Yes/No: ")
         if answer.title() == "Yes":
             print("Your storage:\n")
-            self.log_groceries()
+            self.fridge.log_groceries()
             print("\n")
         else:
             print("Alright, closing the fridge")
+            return
         
         self.handle_menu()
 
@@ -101,28 +60,33 @@ class FridgeProgram:
     def handle_menu(self):
         while True:
             answer = self.get_user_input(
-                "Do you want something to 'Add' = 1, 'Delete' = 2," \
-                " 'Rename' = 3, 'Show Items' = 4, 'Close' = 5 -> ")
+            "Choose an option:\n"
+            "1 = Add item\n"
+            "2 = Delete item\n"
+            "3 = Rename item\n"
+            "4 = Show all items\n"
+            "5 = Close fridge\n"
+            "-> ")
             
             if answer == "1":
                 name, count = self.get_name_and_quantity_input()
-                self.add_item(name, count)
-                self.log_groceries()
+                self.fridge.add_item(name, count)
+                self.fridge.log_groceries()
 
             elif answer == "2":
                 name, count = self.get_name_and_quantity_input()
-                self.remove_item(name, count)
-                self.log_groceries()
+                self.fridge.remove_item(name, count)
+                self.fridge.log_groceries()
                 
             elif answer == "3":
                 old_name = self.get_user_input("Which item do you want to rename? ")
                 new_name = self.get_user_input("Enter new name: ")
-                self.rename_item(old_name, new_name)
-                self.log_groceries()
+                self.fridge.rename_item(old_name, new_name)
+                self.fridge.log_groceries()
 
             elif answer == "4":
                 print("Your items in fridge: ")
-                self.log_groceries()
+                self.fridge.log_groceries()
             
             elif answer == "5":
                 print(" Closing the fridge.")
@@ -135,14 +99,3 @@ class FridgeProgram:
 
                 
 
-
-
-if __name__ == "__main__":
-    groceries = {
-    "Salat": 2,
-    "Tomato": 4,
-    "Peach": 7
-    }
-    program = FridgeProgram(groceries)
-    program.main()
-  
