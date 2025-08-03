@@ -14,7 +14,6 @@ if __name__ == "__main__":
         "Butter": 1
     }
 
-    choice = input("Which fridge do you want to open? (1 or 2): ")
 
   
     first_fridge = Fridge(groceries1)
@@ -22,6 +21,17 @@ if __name__ == "__main__":
 
     second_fridge = Fridge(groceries2)
     second_program = FridgeProgram(second_fridge)
+
+
+    def get_valid_fridge_choice():
+        while True:
+            choice = input("Which fridge do you want to open? (1 or 2): ")
+            if choice.isdigit() and int(choice) in [1, 2]:
+                return int(choice)
+            else:
+                print("Please type 1 or 2.")           
+
+    choice = get_valid_fridge_choice()
 
     if choice == "1":
         first_program.run()
