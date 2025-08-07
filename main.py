@@ -1,6 +1,14 @@
 from fridgeprogram import FridgeProgram
 from fridge import Fridge
 
+def get_valid_fridge_choice():
+    while True:
+        choice = input("Which fridge do you want to open? (1 or 2): ")
+        if choice.isdigit() and int(choice) in [1, 2]:
+            return int(choice)
+        else:
+            print("Please type 1 or 2.")           
+
 
 if __name__ == "__main__":
     groceries1 = {
@@ -13,9 +21,7 @@ if __name__ == "__main__":
         "Eggs": 12,
         "Butter": 1
     }
-
-
-  
+      
     first_fridge = Fridge(groceries1)
     first_program = FridgeProgram(first_fridge)
 
@@ -23,19 +29,18 @@ if __name__ == "__main__":
     second_program = FridgeProgram(second_fridge)
 
 
-    def get_valid_fridge_choice():
-        while True:
-            choice = input("Which fridge do you want to open? (1 or 2): ")
-            if choice.isdigit() and int(choice) in [1, 2]:
-                return int(choice)
-            else:
-                print("Please type 1 or 2.")           
-
     choice = get_valid_fridge_choice()
 
-    if choice == "1":
+    if choice == 1:
         first_program.run()
-    elif choice == "2":    
+    elif choice == 2:    
         second_program.run()
     else:
         print("Invalid choice. Closing program.")
+
+
+
+
+   
+
+  
