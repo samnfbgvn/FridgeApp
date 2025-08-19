@@ -1,7 +1,7 @@
 import requests
 import json
 
-from fridge import Fridge
+from Fridge import Fridge
 
 class FridgeProgram:
     def __init__(self, fridge, filename="groceries_in_fridge.json"):

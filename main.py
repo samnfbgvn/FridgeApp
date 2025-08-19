@@ -1,5 +1,5 @@
-from fridgeprogram import FridgeProgram
-from fridge import Fridge
+from FridgeProgram import FridgeProgram
+from Fridge import Fridge
 
 def get_valid_fridge_choice():
     while True:
@@ -23,10 +23,10 @@ if __name__ == "__main__":
     }
       
     first_fridge = Fridge(groceries1)
-    first_program = FridgeProgram(first_fridge)
+    first_program = FridgeProgram(first_fridge, filename="first_fridge.json")
 
     second_fridge = Fridge(groceries2)
-    second_program = FridgeProgram(second_fridge)
+    second_program = FridgeProgram(second_fridge, filename="second_fridge.json")
 
 
     choice = get_valid_fridge_choice()

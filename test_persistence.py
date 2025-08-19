@@ -1,4 +1,4 @@
-from fridge import Fridge
+from Fridge import Fridge
 
 # 1️⃣ Create a fridge and add some groceries
 my_fridge = Fridge({})
