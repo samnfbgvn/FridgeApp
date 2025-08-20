@@ -1,6 +1,6 @@
 from fastapi import FastAPI, HTTPException
 from Fridge import Fridge 
-import json
+from models import GroceryIn
 
 FRIDGE_FILES = {
     "1": "first_fridge.json",
@@ -28,4 +28,22 @@ app = FastAPI(title="Fridge API", version="0.1.0")
 @app.get("/fridges/{fridge_id}/groceries")
 def list_groceries(fridge_id: str):
     fridge = get_fridge(fridge_id)
+    return {"groceries": fridge.groceries}
+
+@app.post("/fridges/{fridge_id}/groceries")
+def add_grocery(fridge_id: str, item: GroceryIn):
+    
+    filename = FRIDGE_FILES[fridge_id]
+    fridge = get_fridge(fridge_id)
+
+    # normalizace jména (stejně jako v CLI → Title Case)
+    name = item.name.strip().title()
+    count = item.count
+
+    # přidej do lednice
+    fridge.add_item(name, count)
+
+    # ulož zpět
+    fridge.save_to_json(filename)
+
     return {"groceries": fridge.groceries}
