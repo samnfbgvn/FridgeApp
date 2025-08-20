@@ -28,7 +28,6 @@ if __name__ == "__main__":
     second_fridge = Fridge(groceries2)
     second_program = FridgeProgram(second_fridge, filename="second_fridge.json")
 
-
     choice = get_valid_fridge_choice()
 
     if choice == 1:
