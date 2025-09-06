@@ -5,13 +5,6 @@ class Fridge:
     def __init__(self, groceries):
         self.groceries = groceries
 
-    def add_item(self, name, count):
-        name = name.title() 
-        if name in self.groceries:
-            self.groceries[name] += count
-        else:
-            self.groceries[name] = count
-
 
     def log_groceries(self):   
         if not self.groceries:
