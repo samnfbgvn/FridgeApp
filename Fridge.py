@@ -12,12 +12,19 @@ class Fridge:
         for name, quantity  in self.groceries.items():
             print(f"- {name}: {quantity } ks")
 
+    def add_item(self, name, count):
+        name = name.title()
+        if name in self.groceries:
+            self.groceries[name] += count
+        else:
+            self.groceries[name] = count
+        print(f"Added {count} of {name} to the fridge.")
     
     def rename_item(self, old_name, new_name):
         old_name = old_name.title()
-        new_name = new_name.title()
-
+        
         if old_name in self.groceries:
+            new_name = new_name.title()
             if new_name in self.groceries:
                 print(f"Item '{new_name}' already exists.")
             else:
